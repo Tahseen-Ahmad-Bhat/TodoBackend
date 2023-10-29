@@ -7,8 +7,8 @@ export const getTasks = (req, res) => {
       console.log(err);
       res.status(500).json({ message: "Something went wrong!" });
     } else {
-      const task = JSON.parse(data);
-      res.status(200).json(task);
+      const tasks = JSON.parse(data);
+      res.status(200).json({ tasks });
     }
   });
 };
@@ -16,11 +16,11 @@ export const getTasks = (req, res) => {
 export const addTask = (req, res) => {
   const task = req.body;
   jsonReader("./tasks.json", (err, data) => {
-    if (err) return res.json({ message: err });
+    if (err) return res.json({ message: err.message });
     task.id = data.length;
     data.push(task);
     fs.writeFile("./tasks.json", JSON.stringify(data), (err) => {
-      if (err) return res.json({ error: err.message });
+      if (err) return res.json({ message: err.message });
       res.json({ message: "Successfully added task!" });
     });
   });

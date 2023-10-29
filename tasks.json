@@ -10,5 +10,12 @@
     "title": "Shed destruct",
     "description": "Have to destruct cowshed in second half!",
     "id": 3
+  },
+  { "title": "Pray", "description": "Have to pray Isha!", "id": 4 },
+  { "title": "Pray", "description": "Have to pray Isha!", "id": 5 },
+  {
+    "title": "Dinner",
+    "description": "I have to go for dinner at 8 o'clock!",
+    "id": 6
   }
 ]
