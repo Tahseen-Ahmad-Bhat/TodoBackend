@@ -17,7 +17,12 @@ app.use("/api/task/", taskRoutes);
 
 app.use("/api/task", taskRoutes);
 
-// app.use('/')
+app.use("/api/task", taskRoutes);
+
+// For handling random route
+app.use("/*", (req, res) => {
+  res.status(404).json({ message: "Page not found!" });
+});
 
 app.listen(PORT, () => {
   console.log("App is listening at port " + PORT);
