@@ -1,4 +1,5 @@
 import fs from "fs";
+import { v4 as uuidv4 } from "uuid";
 import { jsonReader } from "../util/helper.js";
 
 export const getTasks = (req, res) => {
@@ -17,8 +18,15 @@ export const addTask = (req, res) => {
   const task = req.body;
   jsonReader("./tasks.json", (err, data) => {
     if (err) return res.json({ message: err.message });
-    task.id = data.length;
+
+    // generate unique id
+    const id = uuidv4();
+    task.id = id;
+
+    // Add task to tasks array
     data.push(task);
+
+    // Add tasks back to tasks.json
     fs.writeFile("./tasks.json", JSON.stringify(data), (err) => {
       if (err) return res.json({ message: err.message });
       res.json({ message: "Successfully added task!" });
@@ -31,15 +39,13 @@ export const deleteTask = (req, res) => {
   // console.log(req.query);
   let { id } = req.params;
 
-  // Conversion of string to number
-  id = Number(id);
-
   jsonReader("./tasks.json", (err, data) => {
     if (err) return res.json({ message: err.message });
 
     // Delete an element with the given id using filter method
     const newData = data.filter((task) => task.id !== id);
 
+    // Add back tasks array to file tasks.json
     fs.writeFile("./tasks.json", JSON.stringify(newData), (err) => {
       if (err) return res.json({ message: err.message });
       res.json({ message: "Task deleted successfully!" });
