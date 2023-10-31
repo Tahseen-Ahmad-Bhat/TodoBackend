@@ -25,7 +25,7 @@ export const addTask = (req, res) => {
     // Add tasks back to tasks.json
     fs.writeFile("./tasks.json", JSON.stringify(data), (err) => {
       if (err) return res.json({ message: err.message });
-      res.json({ message: "Successfully added task!" });
+      res.json({ message: "Task added successfully!" });
     });
   });
 };
