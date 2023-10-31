@@ -13,10 +13,6 @@ app.use(cors());
 
 app.use(express.json());
 
-app.use("/api/task/", taskRoutes);
-
-app.use("/api/task", taskRoutes);
-
 app.use("/api/task", taskRoutes);
 
 // For handling random route

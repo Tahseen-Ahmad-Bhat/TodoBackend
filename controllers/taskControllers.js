@@ -1,5 +1,5 @@
 import fs from "fs";
-import { v4 as uuidv4 } from "uuid";
+
 import { jsonReader } from "../util/helper.js";
 
 export const getTasks = (req, res) => {
@@ -18,10 +18,6 @@ export const addTask = (req, res) => {
   const task = req.body;
   jsonReader("./tasks.json", (err, data) => {
     if (err) return res.json({ message: err.message });
-
-    // generate unique id
-    const id = uuidv4();
-    task.id = id;
 
     // Add task to tasks array
     data.push(task);
@@ -49,6 +45,28 @@ export const deleteTask = (req, res) => {
     fs.writeFile("./tasks.json", JSON.stringify(newData), (err) => {
       if (err) return res.json({ message: err.message });
       res.json({ message: "Task deleted successfully!" });
+    });
+  });
+};
+
+export const updateTaskStatus = (req, res) => {
+  let { id } = req.params;
+
+  jsonReader("./tasks.json", (err, data) => {
+    if (err) return res.json({ message: err.message });
+
+    // Update task status with the given id using map method
+    const newData = data.filter((task) => {
+      if (task.id === id) {
+        task.status = "done";
+        return task;
+      } else return task;
+    });
+
+    // Add back tasks array to file tasks.json
+    fs.writeFile("./tasks.json", JSON.stringify(newData), (err) => {
+      if (err) return res.json({ message: err.message });
+      res.json({ message: "Task status updated successfully!" });
     });
   });
 };
