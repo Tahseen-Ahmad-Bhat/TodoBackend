@@ -25,3 +25,7 @@ To run the application locally, use the following command:
 npm start
 
 This will start the server at `http://localhost:8000`. You can access the application by navigating to this URL in your web browser.
+
+## Git collaboration
+
+This is just to experiment about collaboration
