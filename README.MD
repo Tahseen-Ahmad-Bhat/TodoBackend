@@ -32,5 +32,9 @@ This is just to experiment about collaboration
 
 This line is from experiment branch
 line to do experiment for other developer commit
+<<<<<<< HEAD
 
 Hello this line from developer1
+=======
+Hello developer 2 here
+>>>>>>> 26b1c83f9caa957212cb633b907d3f427918692d
